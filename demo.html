@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Demo</title>
+    <meta charset="utf-8" />
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/seatchart@0.1.0/dist/seatchart.css" /> -->
+    <link rel="stylesheet" href="css Files/style.css" />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      .default {
+        color: white;
+        background-color: #353535;
+      }
+
+      .first-class {
+        color: white;
+        background-color: #277da1;
+      }
+
+      .reduced {
+        color: white;
+        background-color: #f8961e;
+	  }
+	  
+	  .test {
+        color: white;
+        background-color: #e53c4a;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/seatchart@0.1.0/dist/seatchart.min.js"></script> -->
+     <script type="text/javascript" src="JS Files/seatchart.js"></script> 
+    <script>
+      var options = {
+        map: {
+		
+		  //تعداد سطر ها
+          rows: 11,
+		  
+		  //تعداد ستون ها
+          columns: 15,
+
+		  //فاصله بین سطر ها		برای مثال بعد از سطر 4 و 8
+		  rowSpacers: [4, 8],
+		  
+          // فاصله بین ستون ها برای مثال بعد از ستون 5 و 10
+		  columnSpacers: [5,10],
+		  
+		  //تعریف انواع صندلی ها
+          seatTypes: {
+            default: {
+              label: 'بدون قیمت',
+              cssClass: 'default',
+              price: 0,
+            },
+            first: {
+              label: 'First Class',
+              cssClass: 'first-class',
+              price: 25,
+              seatRows: [0, 1, 2],
+            },
+            reduced: {
+              label: 'Reduced',
+              cssClass: 'reduced',
+              price: 10,
+              seatRows: [7, 8, 9],
+            },
+            mehrdad: {
+              label: 'مهرداد',
+              cssClass: 'test',
+              price: 9999,
+              seatRows: [4, 5],
+			  seatColumns:[1,4,5],
+			  seats:[ { row: 4, col: 4 }]
+            },
+          },
+		  
+		  //صندلی های غیر فعال
+          disabledSeats: [
+            { row: 0, col: 0 },
+            { row: 0, col: 9 },
+          ],
+		  //صندلی های رزرو شده
+          reservedSeats: [
+            { row: 0, col: 3 },
+            { row: 0, col: 4 },
+          ],
+		  
+		  //صندلی های انتخاب شده پیش فرض
+          selectedSeats: [
+		    { row: 0, col: 5 }, 
+		    { row: 0, col: 6 }
+		  ],
+		  
+		  // نشان دادن جلو صحنه یا هر چیزی منظور هدر  است
+		  frontVisible:true,
+		  
+		  //شروع کننده اعداد در ستون
+		  indexerColumns:{ 
+			 visible:true, 
+			 label:(index)=>{
+			 //return 'A' + index
+			 return 0 + index
+			 }
+		  } ,
+		  //شروع کننده اعداد در ستون
+		  indexerRows:{ 
+			 visible:true
+			 <!-- در صورت تعریف نکردن این قسمت به شکل گیش فرض حروف انگلیسی قرار میدهد -->
+			 <!-- label:(index)=>{ -->
+			 <!-- debugger -->
+			 <!-- return index -->
+			 <!-- } -->
+		  } 
+          
+        },
+		
+		//این قسمت مربوط به کارت های انتخاب شده است
+		cart:{
+		//برای نمای یا عدم نمایش لیست کارت ها
+		visible:true,
+		//واحد پولی
+		currency:' تومن ',
+		//اسم دکمه submit
+		submitLabel:'پرداخت '
+		},
+		//برای نمایش نوع کارت ها در صفحه
+		legendVisible:true
+      };
+
+      var element = document.getElementById('container');
+	  debugger
+      var sc = new Seatchart(element, options);
+      sc.addEventListener('submit', function handleSubmit(e) {debugger
+        alert('Total: ' + e.total + '€');
+      });
+    </script>
+  </body>
+</html>
